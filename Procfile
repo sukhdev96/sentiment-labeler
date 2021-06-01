@@ -1,0 +1,1 @@
+web: gunicorn tigerears2.wsgi --log--file - 
