@@ -1,1 +1,2 @@
-web: gunicorn tigerears2.wsgi --log--file - 
+release: python manage.py migrate
+web: gunicorn wsgi:application
