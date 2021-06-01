@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-b-160 p-t-50">
+
+<form class="login100-form validate-form"  id="form" method="POST"> {% csrf_token %}
+    <span class="login100-form-title p-b-43">
+        Sentiment Labeler
+    </span>
+    
+    <div class="wrap-input100 validate-input" data-validate = "Name is required">
+        <input class="input100" type="text" name="name">
+        <span class="label-input100 w-100 p-b-43">Name</span>
+    </div>
+
+
+    <div class="container-login100-form-btn">
+        <button class="login100-form-btn">
+            Start Labelling!
+        </button>
+    </div>
+    
+</form>
+{% endblock %}

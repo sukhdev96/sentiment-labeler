@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content%}
+<h1>{{object.title}}</h1>
+<p>{% if object.content != None and object.content != '' %}{{ object.content }}{%else%} Article content is empty :() {% endif %}</p>
+
+<b>Written by</b>
+{{ object.author }}
+{% endblock %}
