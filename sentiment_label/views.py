@@ -1,4 +1,4 @@
-from sentiment_label.models import Sentiment
+from sentiment_label.models import Post,Label
 from django.shortcuts import render, get_object_or_404, redirect
 import random
 
@@ -21,41 +21,46 @@ def LabelView(request):
             return redirect('/')
         labeler = request.session['labeler']
 
-        queryset = Sentiment.objects.exclude(author_1__contains = str(labeler.lower())).exclude(author_2__contains = str(labeler.lower())).filter(sentiment_3 = '')
-        print(queryset)
+        past_labels = Label.objects.filter(labeler = labeler)
+        past_ids = [x.post_ID for x in past_labels]
+        print('Past IDs = '+ str(past_ids))
+        available_posts = Post.objects.exclude(id__in=past_ids)
+        print(available_posts)
+        # queryset = Post.objects.exclude(author_1__contains = str(labeler.lower())).exclude(author_2__contains = str(labeler.lower())).filter(sentiment_3 = '')
+        # print(queryset)
         try:
-            post = random.choice(queryset)
+            post = random.choice(available_posts)
             print(post.content)
             context = {'post': post, 'user':request.session['labeler']}
+            request.session['post_id'] = post.id
         except:
             post = {'content':'No Posts Available. Try again Later'}
             context = {'post': post, 'user':request.session['labeler']}
         print('User is: '+request.session['labeler'])
-        request.session['post_id'] = post.id
     if request.method =='POST':
         if 'labeler' not in request.session:
             return redirect('/')
         labeler = request.session['labeler']
-        post = Sentiment.objects.filter(id = request.session['post_id'])
+        post = Post.objects.filter(id = request.session['post_id'])
         post = post[0]
         sentiment = request.POST.get('sentiment')
-        if post.author_1 == '' :
-            post.author_1=labeler
-            post.sentiment_1=sentiment
-            post.save()
+        try:
+            p = Label(post_ID = request.session['post_id'] , content = post.content, labeler = labeler, sentiment = sentiment)
+            p.save()
+            # post.author_1=labeler
+            # post.sentiment_1=sentiment
+            # post.save()
             return redirect('../label/')
-        elif post.author_2 =='' :
-            post.author_2=labeler
-            post.sentiment_2=sentiment
-            post.save()
+        except:
+            print('ERROR SUBMITTING')
             return redirect('../label/')
-        elif post.author_3 =='' :
-            post.author_3=labeler
-            post.sentiment_3=sentiment
-            post.save()
-            return redirect('../label/')
-        else:
-            print('ERROR. POST ALREADY HAS MAXIMUM OF 3 SENTIMENTS')
-            return redirect('../label/')
+        # elif post.author_3 =='' :
+        #     post.author_3=labeler
+        #     post.sentiment_3=sentiment
+        #     post.save()
+        #     return redirect('../label/')
+        # else:
+        #     print('ERROR SUBMITTING')
+        #     # return redirect('../label/')
 
     return render(request, "sentiment_label/label.html",context)
