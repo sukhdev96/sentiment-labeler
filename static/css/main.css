@@ -175,10 +175,6 @@ iframe {
   width: 560px;
 }
 
-.wrap-labeler {
-  width: 560px;
-}
-
 
 /*==================================================================
 [ Form ]*/
@@ -198,11 +194,15 @@ iframe {
   width: 100%;
   display: block;
   font-family: OpenSans-Regular;
-  font-size: 28px;
+  font-size: 24px !important;
   color: #fefefe;
   line-height: 1.2;
   /* text-transform: uppercase; */
   text-align: center;
+}
+
+#paragraph {
+  z-index: 1;
 }
 
 .user-display {

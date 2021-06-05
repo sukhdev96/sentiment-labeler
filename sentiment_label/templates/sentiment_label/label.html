@@ -5,15 +5,16 @@
 <div class="limiter">
     <div class="container-login100">
             <div class="user-display pull-left fixed-top text-align-left p-t-10 p-r-10 p-l-20" style="margin-top: 0" >Currently labelling as: {{user}}</div>
-        <div class="wrap-labeler p-b-160 p-t-50">
+        <div class="wrap-login100 p-b-10 p-t-40 w-75">
 
-<form class="login100-form validate-form" id="form" method="POST"> {% csrf_token %}
-
-
-    <span class="login100-form-title p-b-43 text-center">
+    <div class="position-fixed overflow-auto">
+    <span class="login100-form-title p-b-43 text-center", id="paragraph">
         {{post.content}}
     </span>
-    <div class="col-md-12 text-center">
+    </div>
+
+<form class="login100-form validate-form" id="form" method="POST"> {% csrf_token %}
+    <div class="col-md-12 text-center fixed-bottom p-b-50">
     {%if post.content == 'No Posts Available. Try again Later'%}
         <button type='submit' value='positive' name='sentiment' class="btn btn-success px-5 mx-2" disabled>
             Positive
