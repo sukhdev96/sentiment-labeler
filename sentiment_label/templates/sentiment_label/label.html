@@ -17,15 +17,26 @@
 
 
     {%if post.content == 'No Posts Available. Try again Later'%}
-        <button type='submit' value='positive' name='sentiment' class="btn btn-success px-5 mx-2" disabled>
-            Positive
-        </button>
-        <button type='submit' value='neutral' name='sentiment' class="btn btn-secondary px-5 mx-2" disabled>
-            Neutral
-        </button>
-        <button type='submit' value='negative' name='sentiment' class="btn btn-danger px-5 mx-2" disabled>
-            Negative
-        </button>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm py-2">
+                    <button type='submit' value='positive' name='sentiment' class="btn btn-block btn-success mx-2" disabled>
+                        Positive
+                    </button>
+                </div>
+                <div class="col-sm py-2">
+                    <button type='submit' value='neutral' name='sentiment' class="btn btn-block btn-secondary mx-2" disabled>
+                        Neutral
+                    </button>
+                </div>
+                <div class="col-sm py-2">
+                    <button type='submit' value='negative' name='sentiment' class="btn btn-block btn-danger mx-2" disabled>
+                        Negative
+                    </button>
+                </div>
+            </div>
+        </div>
 
 
     {% else %}
