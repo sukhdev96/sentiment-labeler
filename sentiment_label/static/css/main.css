@@ -172,7 +172,8 @@ iframe {
 }
 
 .wrap-login100 {
-  width: 560px;
+  width: 80%;
+  height: 50%;
 }
 
 
@@ -194,22 +195,19 @@ iframe {
   width: 100%;
   display: block;
   font-family: OpenSans-Regular;
-  font-size: 24px !important;
+  font-size: 21px;
   color: #fefefe;
   line-height: 1.2;
   /* text-transform: uppercase; */
   text-align: center;
 }
 
-#paragraph {
-  z-index: 1;
-}
 
 .user-display {
   width: 100%;
   display: block;
   font-family: OpenSans-Regular;
-  font-size: 20px;
+  font-size: 18px;
   color: #fefefe;
   line-height: 1.2;
   /* text-transform: uppercase; */

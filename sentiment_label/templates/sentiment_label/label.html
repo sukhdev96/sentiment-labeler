@@ -5,16 +5,17 @@
 <div class="limiter">
     <div class="container-login100">
             <div class="user-display pull-left fixed-top text-align-left p-t-10 p-r-10 p-l-20" style="margin-top: 0" >Currently labelling as: {{user}}</div>
-        <div class="wrap-login100 p-b-10 p-t-40 w-75">
-
-    <div class="position-fixed overflow-auto">
-    <span class="login100-form-title p-b-43 text-center", id="paragraph">
-        {{post.content}}
-    </span>
-    </div>
+        <div class="wrap-login100 p-b-160 p-t-50">
 
 <form class="login100-form validate-form" id="form" method="POST"> {% csrf_token %}
-    <div class="col-md-12 text-center fixed-bottom p-b-50">
+
+
+    <span class="login100-form-title p-b-43 text-center overflow-auto card bg-transparent border-0">
+        {{post_text}}
+    </span>
+    <div class="col-md-12 text-center card bg-transparent border-0">
+
+
     {%if post.content == 'No Posts Available. Try again Later'%}
         <button type='submit' value='positive' name='sentiment' class="btn btn-success px-5 mx-2" disabled>
             Positive
@@ -28,17 +29,28 @@
 
 
     {% else %}
-        <button type='submit' value='positive' name='sentiment' class="btn btn-success px-5 mx-2">
-            Positive
-        </button>
-        <button type='submit' value='neutral' name='sentiment' class="btn btn-secondary px-5 mx-2">
-            Neutral
-        </button>
-        <button type='submit' value='negative' name='sentiment' class="btn btn-danger px-5 mx-2">
-            Negative
-        </button>
+
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm py-2">
+                <button type='submit' value='positive' name='sentiment' class="btn btn-block btn-success mx-2">
+                    Positive
+                </button>
+            </div>
+            <div class="col-sm py-2">
+                <button type='submit' value='neutral' name='sentiment' class="btn btn-block btn-secondary mx-2">
+                    Neutral
+                </button>
+            </div>
+            <div class="col-sm py-2">
+                <button type='submit' value='negative' name='sentiment' class="btn btn-block btn-danger mx-2">
+                    Negative
+                </button>
+            </div>
+        </div>
     </div>
     {% endif %}
+</div>
     
 </form>
 {% endblock %}

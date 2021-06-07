@@ -30,8 +30,12 @@ def LabelView(request):
         # print(queryset)
         try:
             post = random.choice(available_posts)
-            print(post.content)
-            context = {'post': post, 'user':request.session['labeler']}
+            if len(post.content) > 450:
+                post_text = post.content[:450] + '.....'
+            else:
+                post_text = post.content
+            print(len(post.content))
+            context = {'post': post, 'user':request.session['labeler'], 'post_text': post_text}
             request.session['post_id'] = post.id
         except:
             post = {'content':'No Posts Available. Try again Later'}
