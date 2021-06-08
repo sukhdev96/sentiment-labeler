@@ -20,11 +20,10 @@ def LabelView(request):
         if 'labeler' not in request.session:
             return redirect('/')
         labeler = request.session['labeler']
-
         past_labels = Label.objects.filter(labeler = labeler)
         past_ids = [x.post_ID for x in past_labels]
         print('Past IDs = '+ str(past_ids))
-        available_posts = Post.objects.exclude(id__in=past_ids)
+        available_posts = Post.objects.exclude(id__in=past_ids).exclude(no_of_labels__gt=2)
         print(available_posts)
         # queryset = Post.objects.exclude(author_1__contains = str(labeler.lower())).exclude(author_2__contains = str(labeler.lower())).filter(sentiment_3 = '')
         # print(queryset)
@@ -38,8 +37,10 @@ def LabelView(request):
             context = {'post': post, 'user':request.session['labeler'], 'post_text': post_text}
             request.session['post_id'] = post.id
         except:
-            post = {'content':'No Posts Available. Try again Later'}
-            context = {'post': post, 'user':request.session['labeler']}
+            # post = {'content':'No Posts Available. Try again Later'}
+            # print(post)
+            post_text = 'No Posts Available. Try again Later'
+            context = {'post_text': post_text, 'user':request.session['labeler']}
         print('User is: '+request.session['labeler'])
     if request.method =='POST':
         if 'labeler' not in request.session:
@@ -51,9 +52,10 @@ def LabelView(request):
         try:
             p = Label(post_ID = request.session['post_id'] , content = post.content, labeler = labeler, sentiment = sentiment)
             p.save()
+            post.no_of_labels += 1
             # post.author_1=labeler
             # post.sentiment_1=sentiment
-            # post.save()
+            post.save()
             return redirect('../label/')
         except:
             print('ERROR SUBMITTING')

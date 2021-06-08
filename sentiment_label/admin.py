@@ -6,7 +6,7 @@ from .models import Post, Label
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id','source','content')
+    list_display = ('id','source','content','no_of_labels')
 
 class LabelAdmin(admin.ModelAdmin):
     list_display = ('id','post_ID','content','labeler','sentiment')
