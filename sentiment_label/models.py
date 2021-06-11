@@ -14,3 +14,4 @@ class Label(models.Model):
     content = models.TextField(blank=True, null=True)
     labeler = models.CharField(max_length=120)
     sentiment = models.CharField(max_length=120)
+    timestamp = models.DateTimeField(auto_now_add=True)

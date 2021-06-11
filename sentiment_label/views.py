@@ -7,11 +7,21 @@ import random
 
 
 def SplashView(request):
+    request.session['error'] = ''
+    if request.method =='GET':
+        request.session['error'] = 'False'
     if request.method =='POST':
-        print(request.POST.get('name'))
-        request.session['labeler'] = request.POST.get('name').lower()
-        return redirect('../label/')
-    return render(request, "sentiment_label/splash.html")
+        pf_number = request.POST.get('pf_number')
+        if pf_number.startswith("00") and len(pf_number) == 8:
+            print(pf_number)
+            request.session['labeler'] = pf_number
+            return redirect('../label/')
+            request.session['error'] = 'False'
+        else:
+            print('Invalid PF Number')
+            request.session['error'] = 'True'
+            print(request.session['error'])
+    return render(request, "sentiment_label/splash.html", {'error':request.session['error']})
 
     
 
@@ -23,7 +33,7 @@ def LabelView(request):
         past_labels = Label.objects.filter(labeler = labeler)
         past_ids = [x.post_ID for x in past_labels]
         print('Past IDs = '+ str(past_ids))
-        available_posts = Post.objects.exclude(id__in=past_ids).exclude(no_of_labels__gt=2)
+        available_posts = Post.objects.exclude(id__in=past_ids).exclude(no_of_labels__gt=4)
         print(available_posts)
         # queryset = Post.objects.exclude(author_1__contains = str(labeler.lower())).exclude(author_2__contains = str(labeler.lower())).filter(sentiment_3 = '')
         # print(queryset)
