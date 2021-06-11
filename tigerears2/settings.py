@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-%uj&&d207kurf#nu+57icgsqa1e299eed45g=0cf*78)8s2csj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['labeler-beta-1.herokuapp.com', 'https://sentiment-labeler.herokuapp.com/','127.0.0.1']
+ALLOWED_HOSTS = ['labeler-beta-1.herokuapp.com', 'sentiment-labeler.herokuapp.com/','127.0.0.1']
 
 
 # Application definition
