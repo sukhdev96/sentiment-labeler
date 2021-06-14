@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'dj_database_url',
 
     #own
-    'products',
     'blog',
     'courses',
     'pages',
