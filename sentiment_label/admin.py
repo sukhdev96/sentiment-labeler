@@ -10,7 +10,7 @@ class PostAdmin(ImportExportModelAdmin):
     list_display = ('id','source','content','no_of_labels')
 
 class LabelAdmin(ImportExportModelAdmin):
-    list_display = ('id','post_ID','content','labeler','sentiment','timestamp')
+    list_display = ('id','post_ID','labeler','sentiment','timestamp')
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Label, LabelAdmin)

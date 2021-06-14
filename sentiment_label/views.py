@@ -60,7 +60,7 @@ def LabelView(request):
         post = post[0]
         sentiment = request.POST.get('sentiment')
         try:
-            p = Label(post_ID = request.session['post_id'] , content = post.content, labeler = labeler, sentiment = sentiment)
+            p = Label(post_ID = request.session['post_id'] , labeler = labeler, sentiment = sentiment)
             p.save()
             post.no_of_labels += 1
             # post.author_1=labeler

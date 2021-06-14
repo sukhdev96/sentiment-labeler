@@ -11,7 +11,6 @@ class Post(models.Model):
 
 class Label(models.Model):
     post_ID = models.IntegerField()
-    content = models.TextField(blank=True, null=True)
     labeler = models.CharField(max_length=120)
     sentiment = models.CharField(max_length=120)
     timestamp = models.DateTimeField(auto_now_add=True)
